@@ -12,8 +12,16 @@ const options: AdminJSOptions = {
   resources: [{
     resource: { model: getModelByName('Recommendation'), client: prisma },
     options: {
+      actions: {
+        new: {
+          before: (request, context) => {
+            console.log(request);
+          }
+        },
+      },
       properties: {
         type: {
+          position: 1,
           type: 'string',
           availableValues: [
             { value: 'tv-habits', label: 'TV Habits' },
@@ -21,6 +29,7 @@ const options: AdminJSOptions = {
           ],
         },
         universes: {
+          position: 2,
           type: 'string',
           availableValues: [],
           components: {
@@ -29,6 +38,7 @@ const options: AdminJSOptions = {
         },
         keywords: {
           type: 'mixed',
+          isArray: true,
           components: {
             edit: components.ConditionalProperty,
           },
@@ -44,6 +54,8 @@ const options: AdminJSOptions = {
         }
       },
     },
+  }, {
+    resource: { model: getModelByName('KeywordGroup'), client: prisma },
   }],
   databases: [],
 };

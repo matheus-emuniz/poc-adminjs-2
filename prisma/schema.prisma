@@ -10,9 +10,16 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model KeywordGroup {
+  id               Int             @id @default(autoincrement())
+  action           String
+  Recommendation   Recommendation? @relation(fields: [recommendationId], references: [id])
+  recommendationId Int?
+}
+
 model Recommendation {
-  id        Int    @id @default(autoincrement())
+  id        Int            @id @default(autoincrement())
   type      String
   universes String
-  keywords  String
+  keywords  KeywordGroup[]
 }

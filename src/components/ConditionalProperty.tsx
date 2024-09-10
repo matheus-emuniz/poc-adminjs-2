@@ -6,8 +6,6 @@ const ConditionalProperty: React.FC<EditPropertyProps> = (props) => {
   const { custom = {} } = property;
   const { showIf = null, overrideComponents } = custom;
 
-  console.log(property);
-
   if (!showIf) return null;
 
   const cleanProperty = React.useMemo(() => ({
